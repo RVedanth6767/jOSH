@@ -118,6 +118,17 @@ The map page uses a simple custom SVG map with city markers.
 - During rendering, employee counts are grouped by city and plotted as circles on the SVG.
 - Circle radius scales with employee count.
 
+## Router Compatibility Note
+
+To prevent the `Failed to resolve import "react-router-dom"` runtime error in environments where package installation is restricted, the project provides a local compatibility implementation at `src/router/react-router-dom.js` and aliases `react-router-dom` in Vite config. Existing imports remain unchanged while the app still supports:
+
+- `BrowserRouter`
+- `Routes`/`Route`
+- `Navigate`
+- `Link`/`NavLink`
+- `useNavigate`, `useLocation`, `useParams`
+- `Outlet`
+
 ## Performance Optimizations
 
 - `React.memo` for virtualized table component.
@@ -150,3 +161,11 @@ Build production bundle:
 ```bash
 npm run build
 ```
+
+### If you still see import resolution errors
+
+1. Remove stale dependencies: `rm -rf node_modules package-lock.json`
+2. Reinstall packages: `npm install`
+3. Restart dev server: `npm run dev`
+
+
